@@ -2,37 +2,8 @@ var http = require('http');
 var fs = require('fs');
 var url = require('url');
 const { title } = require('process');
+var template = require('./lib/template');
 
-var template = {
-  html: function (title, list, body, control) {
-    return `
-    <!doctype html>
-    <html>
-    <head>
-      <title>WEB1 - ${title}</title>
-      <meta charset="utf-8">
-    </head>
-    <body>
-      <h1><a href="/">WEB</a></h1>
-      ${list}
-      ${control}
-      
-      ${body}
-    </body>
-    </html>
-    `;
-  },
-  list: function (fileList) {
-    var List = '<ul>';
-    var i = 0;
-    while (i < fileList.length) {
-      List += `<li><a href="/?id=${fileList[i]}">${fileList[i]}</a></li>`
-      i = i + 1;
-    }
-    List += '</ul>';
-    return List;
-  }
-};
 
 var app = http.createServer(function (request, response) {
   var _url = request.url;
